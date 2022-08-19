@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MaterialYou</string>
+    <string name="app_name">NASA PIC</string>
     <string name="photo_of_the_day_stub">Photo of the day</string>
     <string name="search_wiki">Найти в Википедии</string>
     <string name="wiki_helper_text">Поищите термин в википедии</string>
