@@ -105,7 +105,7 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             }
             is PictureOfTheDayData.Loading -> {
-                //TODO
+                //nothing to do
             }
             is PictureOfTheDayData.Error -> {
                 toast(data.error.message)
