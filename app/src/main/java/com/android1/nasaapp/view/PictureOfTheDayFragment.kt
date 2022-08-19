@@ -2,13 +2,14 @@ package com.android1.nasaapp.view
 
 import android.content.Intent
 import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.android1.nasaapp.MainActivity
 import com.android1.nasaapp.R
@@ -19,6 +20,7 @@ import com.geekbrains.materialyou.ui.picture.BottomNavigationDrawerFragment
 import com.geekbrains.materialyou.ui.picture.PictureOfTheDayData
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -92,7 +94,6 @@ class PictureOfTheDayFragment : Fragment() {
                 val serverResponseData = data.serverResponseData
 
                 val url = serverResponseData.url
-
                 if (url.isNullOrEmpty()) {
                     toast("Link is empty")
                 } else {
@@ -103,6 +104,21 @@ class PictureOfTheDayFragment : Fragment() {
                         crossfade(true)
                     }
                 }
+
+                serverResponseData.explanation.let { explanationText ->
+                    val bottomSheetDescription: TextView? = view?.findViewById(R.id.bottomSheetDescription)
+                    if (bottomSheetDescription != null) {
+                        bottomSheetDescription.text = explanationText
+                    }
+                }
+
+                serverResponseData.title.let { titleText ->
+                    val bottomSheetDescriptionHeader: TextView? = view?.findViewById(R.id.bottomSheetDescriptionHeader)
+                    if (bottomSheetDescriptionHeader != null) {
+                        bottomSheetDescriptionHeader.text = titleText
+                    }
+                }
+
             }
             is PictureOfTheDayData.Loading -> {
                 //nothing to do
@@ -116,6 +132,8 @@ class PictureOfTheDayFragment : Fragment() {
     private fun setBottomSheetBehavior(bottomSheet : ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.isHideable = false
+        bottomSheetBehavior.peekHeight = 500
     }
 
     private fun setBottomAppBar(view: View) {

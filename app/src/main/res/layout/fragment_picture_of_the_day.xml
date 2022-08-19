@@ -30,6 +30,7 @@
                 app:endIconMode="custom"
 
                 app:helperText="@string/wiki_helper_text"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/image_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -53,12 +54,13 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_no_photo_vector" />
 
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
     <include layout="@layout/bottom_sheet_layout" />
 
-    <!-- fabCradleMargin РІРјРµСЃС‚Рѕ fabCradleDiameter -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
