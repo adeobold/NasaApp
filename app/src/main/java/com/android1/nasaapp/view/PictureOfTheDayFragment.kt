@@ -20,6 +20,9 @@ import com.geekbrains.materialyou.ui.picture.BottomNavigationDrawerFragment
 import com.geekbrains.materialyou.ui.picture.PictureOfTheDayData
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.chip.Chip
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class PictureOfTheDayFragment : Fragment() {
@@ -37,7 +40,8 @@ class PictureOfTheDayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel.getData()
+        val startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        viewModel.getData(startDate)
             .observe(viewLifecycleOwner) { renderData(it) }
 
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
@@ -53,6 +57,24 @@ class PictureOfTheDayFragment : Fragment() {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
+        }
+
+        binding.chipGroup.setOnCheckedChangeListener { chipGroup, position ->
+            chipGroup.findViewById<Chip>(position)?.let {
+                var startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                when(it.text){
+                    getResources().getString(R.string.chipTwoDaysBefore) ->
+                        startDate = LocalDateTime.now().minusDays(2)
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                    getResources().getString(R.string.chipYesterdayText) ->
+                        startDate = LocalDateTime.now().minusDays(1)
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                    getResources().getString(R.string.chipTodayText) ->
+                        startDate = LocalDateTime.now()
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                }
+                viewModel.getData(startDate).observe(viewLifecycleOwner) { renderData(it) }
+            }
         }
 
         setBottomAppBar(view)

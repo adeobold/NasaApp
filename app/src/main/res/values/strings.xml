@@ -6,4 +6,8 @@
     <string name="favourite">favourite</string>
     <string name="settings">settings</string>
     <string name="search">Search</string>
+    <string name="chipYesterdayText">Вчера</string>
+    <string name="chipTodayText">Сегодня</string>
+    <string name="chipsCaptionText">Выберите день для картинки</string>
+    <string name="chipTwoDaysBefore">Позавчера</string>
 </resources>
