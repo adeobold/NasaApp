@@ -10,4 +10,7 @@
     <string name="chipTodayText">Сегодня</string>
     <string name="chipsCaptionText">Выберите день для картинки</string>
     <string name="chipTwoDaysBefore">Позавчера</string>
+    <string name="SelectThemeText">Выберите тему</string>
+    <string name="ThemeRoundText">Круглая</string>
+    <string name="ThemeSquareText">Квадратная</string>
 </resources>

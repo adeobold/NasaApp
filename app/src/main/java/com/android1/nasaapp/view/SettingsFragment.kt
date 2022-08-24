@@ -1,23 +1,25 @@
-package com.geekbrains.materialyou.ui.chips
+package com.android1.nasaapp.view
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.android1.nasaapp.databinding.FragmentChipsBinding
+import com.android1.nasaapp.R
+import com.android1.nasaapp.databinding.FragmentSettingsBinding
 import com.google.android.material.chip.Chip
 
-class ChipsFragment : Fragment() {
-    private var _binding: FragmentChipsBinding? = null
+class SettingsFragment : Fragment() {
+    private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentChipsBinding.inflate(inflater, container, false)
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -25,18 +27,17 @@ class ChipsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.chipGroup.setOnCheckedChangeListener { chipGroup, position ->
-            chipGroup.findViewById<Chip>(position)?.let {
-                Toast.makeText(context, "Выбран ${it.text}", Toast.LENGTH_SHORT).show()
+
+            when (chipGroup.findViewById<Chip>(position)?.text) {
+                resources.getString(R.string.ThemeRoundText) ->
+                    activity?.theme?.applyStyle(R.style.IndigoTheme, true)
+                resources.getString(R.string.ThemeSquareText) ->
+                    activity?.theme?.applyStyle(R.style.PinkTheme, true)
             }
+            activity?.recreate()
         }
 
-        binding.chipClose.setOnCloseIconClickListener {
-            Toast.makeText(
-                context,
-                "Close is Clicked",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+
     }
 
     override fun onDestroyView() {
@@ -45,6 +46,6 @@ class ChipsFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = ChipsFragment()
+        fun newInstance() = SettingsFragment()
     }
 }

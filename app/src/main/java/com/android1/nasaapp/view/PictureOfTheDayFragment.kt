@@ -14,8 +14,8 @@ import coil.load
 import com.android1.nasaapp.MainActivity
 import com.android1.nasaapp.R
 import com.android1.nasaapp.databinding.FragmentPictureOfTheDayBinding
+import com.android1.nasaapp.utils.DATE_FORMAT
 import com.android1.nasaapp.viewmodel.PictureOfTheDayViewModel
-import com.geekbrains.materialyou.ui.chips.ChipsFragment
 import com.geekbrains.materialyou.ui.picture.BottomNavigationDrawerFragment
 import com.geekbrains.materialyou.ui.picture.PictureOfTheDayData
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -40,7 +40,7 @@ class PictureOfTheDayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        val startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT))
         viewModel.getData(startDate)
             .observe(viewLifecycleOwner) { renderData(it) }
 
@@ -61,17 +61,17 @@ class PictureOfTheDayFragment : Fragment() {
 
         binding.chipGroup.setOnCheckedChangeListener { chipGroup, position ->
             chipGroup.findViewById<Chip>(position)?.let {
-                var startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                var startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT))
                 when(it.text){
                     getResources().getString(R.string.chipTwoDaysBefore) ->
                         startDate = LocalDateTime.now().minusDays(2)
-                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                        .format(DateTimeFormatter.ofPattern(DATE_FORMAT))
                     getResources().getString(R.string.chipYesterdayText) ->
                         startDate = LocalDateTime.now().minusDays(1)
-                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                        .format(DateTimeFormatter.ofPattern(DATE_FORMAT))
                     getResources().getString(R.string.chipTodayText) ->
                         startDate = LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                        .format(DateTimeFormatter.ofPattern(DATE_FORMAT))
                 }
                 viewModel.getData(startDate).observe(viewLifecycleOwner) { renderData(it) }
             }
@@ -98,7 +98,8 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_fav -> toast("Favourite")
-            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()?.add(R.id.container, ChipsFragment.newInstance())
+            R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.container, SettingsFragment.newInstance())
                 ?.addToBackStack(null)
                 ?.commit()
             android.R.id.home -> {
