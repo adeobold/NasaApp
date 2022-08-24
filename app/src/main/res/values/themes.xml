@@ -21,6 +21,7 @@
         <item name="materialButtonStyle">@style/AppButton</item>
         <item name="textInputStyle">@style/AppTextField</item>
         <item name="materialCardViewStyle">@style/AppCard</item>
+        <item name="background">@color/white</item>
     </style>
 
     <style name="AppTheme" parent="Theme.NasaApp">

@@ -5,13 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.android1.nasaapp.R
 import com.android1.nasaapp.databinding.FragmentSettingsBinding
 import com.android1.nasaapp.utils.SETTINGS_THEME
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 
 
 class SettingsFragment : Fragment() {
