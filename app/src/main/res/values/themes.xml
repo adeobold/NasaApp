@@ -45,6 +45,14 @@
         <item name="themeColorPrimary">@color/pink</item>
     </style>
 
+    <style name="SquareTheme" parent="IndigoTheme">
+        <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.Square.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/AppShapeAppearance.Square.MediumComponent</item>
+    </style>
 
+    <style name="RoundTheme" parent="PinkTheme">
+        <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.Round.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/AppShapeAppearance.Round.MediumComponent</item>
+    </style>
 
 </resources>
