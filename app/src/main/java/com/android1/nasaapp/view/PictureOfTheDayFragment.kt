@@ -1,8 +1,10 @@
 package com.android1.nasaapp.view
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +17,7 @@ import com.android1.nasaapp.MainActivity
 import com.android1.nasaapp.R
 import com.android1.nasaapp.databinding.FragmentPictureOfTheDayBinding
 import com.android1.nasaapp.utils.DATE_FORMAT
+import com.android1.nasaapp.utils.SETTINGS_THEME
 import com.android1.nasaapp.viewmodel.PictureOfTheDayViewModel
 import com.geekbrains.materialyou.ui.picture.BottomNavigationDrawerFragment
 import com.geekbrains.materialyou.ui.picture.PictureOfTheDayData
@@ -43,7 +46,6 @@ class PictureOfTheDayFragment : Fragment() {
         val startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_FORMAT))
         viewModel.getData(startDate)
             .observe(viewLifecycleOwner) { renderData(it) }
-
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
     }
